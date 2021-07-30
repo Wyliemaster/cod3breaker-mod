@@ -1,4 +1,4 @@
-﻿#include "includes.h"
+#include "includes.h"
 #include <windows.h>
 #include <string>
 
@@ -24,19 +24,22 @@ public:
         auto code = "The <cr>Cod3breaker</c> code is: <cy>" + std::to_string(GM->m_nSecretNumberRand1 - GM->m_nSecretNumberRand2) + "</c>";
         gd::FLAlertLayer::create(nullptr, "Cod3breaker", "Thanks!", nullptr, code)->show();
 
-        //copy clipboard code
         clipboardText(std::to_string(GM->m_nSecretNumberRand1 - GM->m_nSecretNumberRand2).c_str());
 
     }
 };
     
-
 bool (__thiscall* secretLayer2T)(SecretLayer2* self);
 
 bool  __fastcall secretLayer2H(SecretLayer2* self) {
     bool init = secretLayer2T(self);
 
     auto sprite = cocos2d::CCSprite::createWithSpriteFrameName("GJ_infoBtn_001.png");
+
+    auto label = CCLabelBMFont::create("Cod3breaker\n    code    ", "bigFont.fnt");
+    label->setPosition(47, 85);
+    label->setScale(0.3f);
+    self->addChild(label);
 
     auto btn = gd::CCMenuItemSpriteExtra::create(
         sprite,
